@@ -3562,12 +3562,14 @@
 				BITCODE_GENERATION_MODE = bitcode;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEAD_CODE_STRIPPING = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"SPIRV_CROSS_NAMESPACE_OVERRIDE=MVK_spirv_cross",
 				);
 				PRODUCT_NAME = SPIRVCross;
-				SDKROOT = iphoneos;
+				SDKROOT = appletvos;
 				VALID_ARCHS = arm64;
 			};
 			name = Debug;
@@ -3579,12 +3581,14 @@
 				BITCODE_GENERATION_MODE = bitcode;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEAD_CODE_STRIPPING = NO;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"SPIRV_CROSS_NAMESPACE_OVERRIDE=MVK_spirv_cross",
 				);
 				PRODUCT_NAME = SPIRVCross;
-				SDKROOT = iphoneos;
+				SDKROOT = appletvos;
 				VALID_ARCHS = arm64;
 			};
 			name = Release;
@@ -3592,10 +3596,7 @@
 		A90FD9E221CC4EB900B92BB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"SPIRV_CROSS_NAMESPACE_OVERRIDE=MVK_spirv_cross",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				PRODUCT_NAME = SPIRVCross;
 				SDKROOT = macosx;
 			};
@@ -3604,10 +3605,7 @@
 		A90FD9E321CC4EB900B92BB2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"SPIRV_CROSS_NAMESPACE_OVERRIDE=MVK_spirv_cross",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				PRODUCT_NAME = SPIRVCross;
 				SDKROOT = macosx;
 			};
@@ -3669,6 +3667,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEPLOYMENT_POSTPROCESSING = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"SPIRV_CROSS_NAMESPACE_OVERRIDE=MVK_spirv_cross",
+				);
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3678,7 +3680,7 @@
 					"\"$(SRCROOT)/External/glslang/External/spirv-tools/build\"",
 				);
 				PRODUCT_NAME = SPIRVTools;
-				SDKROOT = iphoneos;
+				SDKROOT = appletvos;
 				VALID_ARCHS = arm64;
 			};
 			name = Debug;
@@ -3691,6 +3693,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEPLOYMENT_POSTPROCESSING = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "SPIRV_CROSS_NAMESPACE_OVERRIDE=MVK_spirv_cross";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3700,7 +3703,7 @@
 					"\"$(SRCROOT)/External/glslang/External/spirv-tools/build\"",
 				);
 				PRODUCT_NAME = SPIRVTools;
-				SDKROOT = iphoneos;
+				SDKROOT = appletvos;
 				VALID_ARCHS = arm64;
 			};
 			name = Release;
@@ -3757,7 +3760,7 @@
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				PRODUCT_NAME = glslang;
-				SDKROOT = iphoneos;
+				SDKROOT = appletvos;
 				VALID_ARCHS = arm64;
 			};
 			name = Debug;
@@ -3780,7 +3783,7 @@
 				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				PRODUCT_NAME = glslang;
-				SDKROOT = iphoneos;
+				SDKROOT = appletvos;
 				VALID_ARCHS = arm64;
 			};
 			name = Release;

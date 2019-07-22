@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38A6592322E2006600C94D50 /* libglslang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A6592022E2006500C94D50 /* libglslang.a */; };
+		38A6592622E200AA00C94D50 /* libSPIRVCross.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A6592522E200AA00C94D50 /* libSPIRVCross.a */; };
+		38A65C2B22E2039C00C94D50 /* libSPIRVTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A65C2A22E2039C00C94D50 /* libSPIRVTools.a */; };
 		45003E73214AD4E500E989CB /* MVKExtensions.def in Headers */ = {isa = PBXBuildFile; fileRef = 45003E6F214AD4C900E989CB /* MVKExtensions.def */; };
 		45003E74214AD4E600E989CB /* MVKExtensions.def in Headers */ = {isa = PBXBuildFile; fileRef = 45003E6F214AD4C900E989CB /* MVKExtensions.def */; };
 		4553AEFB2251617100E8EBCD /* MVKBlockObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4553AEF62251617100E8EBCD /* MVKBlockObserver.m */; };
@@ -296,6 +299,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38A6592022E2006500C94D50 /* libglslang.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglslang.a; path = "../../../Library/Developer/Xcode/DerivedData/Build/Products/Release-appletvos/libglslang.a"; sourceTree = "<group>"; };
+		38A6592522E200AA00C94D50 /* libSPIRVCross.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSPIRVCross.a; path = "../../../Library/Developer/Xcode/DerivedData/Build/Products/Release-appletvos/libSPIRVCross.a"; sourceTree = "<group>"; };
+		38A65C2A22E2039C00C94D50 /* libSPIRVTools.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libSPIRVTools.a; path = "../../../Library/Developer/Xcode/DerivedData/Build/Products/Release-appletvos/libSPIRVTools.a"; sourceTree = "<group>"; };
 		45003E6F214AD4C900E989CB /* MVKExtensions.def */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = MVKExtensions.def; sourceTree = "<group>"; };
 		4553AEF62251617100E8EBCD /* MVKBlockObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVKBlockObserver.m; sourceTree = "<group>"; };
 		4553AEFA2251617100E8EBCD /* MVKBlockObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVKBlockObserver.h; sourceTree = "<group>"; };
@@ -415,6 +421,19 @@
 		A9F0429E1FB4CF82009FCCB8 /* MVKLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVKLogging.h; sourceTree = "<group>"; };
 		A9F2559121F96814008C7785 /* vulkan-portability */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "vulkan-portability"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		38A6590C22E1FF4800C94D50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38A65C2B22E2039C00C94D50 /* libSPIRVTools.a in Frameworks */,
+				38A6592322E2006600C94D50 /* libglslang.a in Frameworks */,
+				38A6592622E200AA00C94D50 /* libSPIRVCross.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		A94FB7641C7DFB4800632CA3 /* MoltenVK */ = {
@@ -624,6 +643,9 @@
 		A9F55D24198BE6A7004EC31B = {
 			isa = PBXGroup;
 			children = (
+				38A6592522E200AA00C94D50 /* libSPIRVCross.a */,
+				38A65C2A22E2039C00C94D50 /* libSPIRVTools.a */,
+				38A6592022E2006500C94D50 /* libglslang.a */,
 				A94FB7641C7DFB4800632CA3 /* MoltenVK */,
 				A9F0429B1FB4CF82009FCCB8 /* Common */,
 				A9AC84381D061E7000E2CA97 /* include */,
@@ -790,8 +812,7 @@
 			buildPhases = (
 				A9B8EE071A98D796009C5A02 /* Headers */,
 				A9B8EE051A98D796009C5A02 /* Sources */,
-				A9731FAD1EDDAE39006B7298 /* Create Dynamic Library */,
-				A92EF79721854B3300C8B91B /* Create Framework */,
+				38A6590C22E1FF4800C94D50 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -924,24 +945,6 @@
 			shellPath = /bin/sh;
 			shellScript = ". \"${SRCROOT}/../Scripts/create_framework_macos.sh\"\n";
 		};
-		A92EF79721854B3300C8B91B /* Create Framework */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Create Framework";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". \"${SRCROOT}/../Scripts/create_framework_ios.sh\"\n";
-		};
 		A93F47C91D7E389E002AF700 /* Create Dynamic Library */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -955,20 +958,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = ". \"${SRCROOT}/../Scripts/create_dylib_macos.sh\"\n";
-		};
-		A9731FAD1EDDAE39006B7298 /* Create Dynamic Library */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Create Dynamic Library";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = ". \"${SRCROOT}/../Scripts/create_dylib_ios.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1117,8 +1106,9 @@
 				ARCHS = arm64;
 				BITCODE_GENERATION_MODE = bitcode;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SDKROOT = appletvos;
+				STRIP_INSTALLED_PRODUCT = NO;
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 				VALID_ARCHS = arm64;
 			};
 			name = Debug;
@@ -1129,8 +1119,9 @@
 				ARCHS = arm64;
 				BITCODE_GENERATION_MODE = bitcode;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SDKROOT = appletvos;
+				STRIP_INSTALLED_PRODUCT = NO;
+				TARGETED_DEVICE_FAMILY = "1,2,3";
 				VALID_ARCHS = arm64;
 			};
 			name = Release;

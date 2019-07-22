@@ -712,27 +712,42 @@ void MVKPhysicalDevice::initMetalFeatures() {
     _metalFeatures.texelBuffers = true;
 	_metalFeatures.maxTextureDimension = (4 * KIBI);
 
+#if TARGET_OS_TV == 0
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v2] ) {
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v1] ) {
+#endif
 		_metalFeatures.mslVersionEnum = MTLLanguageVersion1_1;
         _metalFeatures.dynamicMTLBuffers = true;
 		_metalFeatures.maxTextureDimension = (8 * KIBI);
     }
-
+#if TARGET_OS_TV == 0
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v3] ) {
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v2] ) {
+#endif
 		_metalFeatures.mslVersionEnum = MTLLanguageVersion1_2;
         _metalFeatures.shaderSpecialization = true;
         _metalFeatures.stencilViews = true;
     }
-
+		
+#if TARGET_OS_TV == 0
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v4] ) {
+#else
+		if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v3] ) {
+#endif
 		_metalFeatures.mslVersionEnum = MTLLanguageVersion2_0;
     }
 
+#if TARGET_OS_TV == 0
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v5] ) {
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v4] ) {
+#endif
 		_metalFeatures.mslVersionEnum = MTLLanguageVersion2_1;
 		MVK_SET_FROM_ENV_OR_BUILD_BOOL(_metalFeatures.events, MVK_ALLOW_METAL_EVENTS);
 	}
-
+#if TARGET_OS_TV == 0
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily3_v1] ) {
 		_metalFeatures.indirectDrawing = true;
 		_metalFeatures.baseVertexInstanceDrawing = true;
@@ -748,11 +763,24 @@ void MVKPhysicalDevice::initMetalFeatures() {
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily3_v3] ) {
 		_metalFeatures.arrayOfSamplers = true;
 	}
-
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily2_v1] ) {
+		_metalFeatures.indirectDrawing = true;
+		_metalFeatures.baseVertexInstanceDrawing = true;
+		_metalFeatures.combinedStoreResolveAction = true;
+		_metalFeatures.mtlBufferAlignment = 16;     // Min float4 alignment for typical vertex buffers. MTLBuffer may go down to 4 bytes for other data.
+		_metalFeatures.maxTextureDimension = (16 * KIBI);
+		_metalFeatures.depthSampleCompare = true;
+		_metalFeatures.arrayOfTextures = true;
+	}
+#endif
+	
+#if TARGET_OS_TV == 0
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily5_v1] ) {
 		_metalFeatures.layeredRendering = true;
 	}
-
+#endif
+		
 #endif
 
 #if MVK_MACOS
@@ -824,6 +852,9 @@ void MVKPhysicalDevice::initMetalFeatures() {
 			setMSLVersion(1, 1);
 			break;
 #if MVK_IOS
+		case MTLLanguageVersion2_2:
+			setMSLVersion(2, 2);
+			break;
 		case MTLLanguageVersion1_0:
 			setMSLVersion(1, 0);
 			break;
@@ -873,22 +904,35 @@ void MVKPhysicalDevice::initFeatures() {
 #if MVK_IOS
     _features.textureCompressionETC2 = true;
 
+#if TARGET_OS_TV == 0
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily2_v1] ) {
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v1] ) {
+#endif
         _features.textureCompressionASTC_LDR = true;
     }
-
+#if TARGET_OS_TV == 0
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily3_v1] ) {
         _features.occlusionQueryPrecise = true;
     }
-
+#endif
+		
+#if TARGET_OS_TV == 0
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v4] ) {
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily2_v1] ) {
+#endif
 		_features.dualSrcBlend = true;
 	}
-
+		
+#if TARGET_OS_TV == 0
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily2_v4] ) {
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v3] ) {
+#endif
 		_features.depthClamp = true;
 	}
-
+#if TARGET_OS_TV == 0
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily3_v2] ) {
 		_features.tessellationShader = true;
 		_features.shaderTessellationAndGeometryPointSize = true;
@@ -897,10 +941,19 @@ void MVKPhysicalDevice::initFeatures() {
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily4_v1] ) {
 		_features.imageCubeArray = true;
 	}
-  
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily2_v1] ) {
+			_features.tessellationShader = true;
+			_features.shaderTessellationAndGeometryPointSize = true;
+			_features.imageCubeArray = true;
+			_features.occlusionQueryPrecise = true;
+	}
+#endif
+#if TARGET_OS_TV == 0
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily5_v1] ) {
 		_features.multiViewport = true;
 	}
+#endif
 #endif
 
 #if MVK_MACOS
@@ -999,7 +1052,11 @@ void MVKPhysicalDevice::initProperties() {
 
 	// Limits
 #if MVK_IOS
+#if TARGET_OS_TV == 0
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily2_v1] ) {
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v1] ) {
+#endif
         _properties.limits.maxColorAttachments = kMVKCachedColorAttachmentCount;
     } else {
         _properties.limits.maxColorAttachments = 4;		// < kMVKCachedColorAttachmentCount
@@ -1080,20 +1137,26 @@ void MVKPhysicalDevice::initProperties() {
 
 #if MVK_IOS
     _properties.limits.maxFragmentInputComponents = 60;
-
+#if TARGET_OS_TV == 0
     if ([_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily3_v1]) {
+#else
+	if ([_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily2_v1]) {
+#endif
         _properties.limits.minTexelBufferOffsetAlignment = 16;
         _properties.limits.optimalBufferCopyOffsetAlignment = 16;
     } else {
         _properties.limits.minTexelBufferOffsetAlignment = 64;
         _properties.limits.optimalBufferCopyOffsetAlignment = 64;
     }
-
+#if TARGET_OS_TV == 0
     if ([_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily5_v1]) {
         _properties.limits.maxTessellationGenerationLevel = 64;
         _properties.limits.maxTessellationPatchSize = 32;
     } else if ([_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily3_v2]) {
-        _properties.limits.maxTessellationGenerationLevel = 16;
+#else
+	if ([_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily2_v1]) {
+#endif
+		_properties.limits.maxTessellationGenerationLevel = 16;
         _properties.limits.maxTessellationPatchSize = 32;
     } else {
         _properties.limits.maxTessellationGenerationLevel = 0;
@@ -1158,6 +1221,7 @@ void MVKPhysicalDevice::initProperties() {
 		_properties.limits.maxComputeSharedMemorySize = (uint32_t)_mtlDevice.maxThreadgroupMemoryLength;
 	} else {
 #if MVK_IOS
+#if TARGET_OS_TV == 0
 		if ([_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily4_v1]) {
 			_properties.limits.maxComputeSharedMemorySize = (32 * KIBI);
 		} else if ([_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily3_v1]) {
@@ -1165,6 +1229,13 @@ void MVKPhysicalDevice::initProperties() {
 		} else {
 			_properties.limits.maxComputeSharedMemorySize = ((16 * KIBI) - 32);
 		}
+#else
+		if ([_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily2_v1]) {
+			_properties.limits.maxComputeSharedMemorySize = (32 * KIBI);
+		} else {
+			_properties.limits.maxComputeSharedMemorySize = ((16 * KIBI) - 32);
+		}
+#endif
 #endif
 #if MVK_MACOS
 		_properties.limits.maxComputeSharedMemorySize = (32 * KIBI);
@@ -1369,10 +1440,15 @@ void MVKPhysicalDevice::initPipelineCacheUUID() {
 
 MTLFeatureSet MVKPhysicalDevice::getHighestMTLFeatureSet() {
 #if MVK_IOS
+#if TARGET_OS_TV == 0
 	MTLFeatureSet maxFS = MTLFeatureSet_iOS_GPUFamily5_v1;
 	MTLFeatureSet minFS = MTLFeatureSet_iOS_GPUFamily1_v1;
-#endif
+#else
+	MTLFeatureSet maxFS = MTLFeatureSet_tvOS_GPUFamily2_v2;
+	MTLFeatureSet minFS = MTLFeatureSet_TVOS_GPUFamily1_v1;
 
+#endif
+#endif
 #if MVK_MACOS
 	MTLFeatureSet maxFS = MTLFeatureSet_macOS_GPUFamily2_v1;
 	MTLFeatureSet minFS = MTLFeatureSet_macOS_GPUFamily1_v1;
@@ -1490,12 +1566,16 @@ void MVKPhysicalDevice::initMemoryProperties() {
 	_hostCoherentMemoryTypes 	= 0x2;			// Shared only
 	_hostVisibleMemoryTypes		= 0x2;			// Shared only
 	_allMemoryTypes				= 0x3;			// Private & shared
+#if TARGET_OS_TV == 0
 	if ([getMTLDevice() supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v3]) {
+#endif
 		_memoryProperties.memoryTypeCount = 3;	// Memoryless storage available
 		_privateMemoryTypes			= 0x5;		// Private & memoryless
 		_lazilyAllocatedMemoryTypes	= 0x4;		// Memoryless only
 		_allMemoryTypes				= 0x7;		// Private, shared & memoryless
+#if TARGET_OS_TV == 0
 	}
+#endif
 #endif
 }
 
@@ -1528,6 +1608,8 @@ void MVKPhysicalDevice::logGPUInfo() {
 	logMsg += "\n\tsupports Metal Shading Language version %s and the following Metal Feature Sets:";
 
 #if MVK_IOS
+	
+#if TARGET_OS_TV == 0
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily5_v1] ) { logMsg += "\n\t\tiOS GPU Family 5 v1"; }
 
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily4_v2] ) { logMsg += "\n\t\tiOS GPU Family 4 v2"; }
@@ -1549,6 +1631,7 @@ void MVKPhysicalDevice::logGPUInfo() {
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v3] ) { logMsg += "\n\t\tiOS GPU Family 1 v3"; }
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v2] ) { logMsg += "\n\t\tiOS GPU Family 1 v2"; }
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v1] ) { logMsg += "\n\t\tiOS GPU Family 1 v1"; }
+#endif
 #endif
 
 #if MVK_MACOS
@@ -2420,6 +2503,7 @@ void mvkPopulateGPUInfo(VkPhysicalDeviceProperties& devProps, id<MTLDevice> mtlD
 	//"a" is the Apple brand, MM is the SoC model number (8, 10...) and X is 1 for X version, 0 for other.
 	NSUInteger coreCnt = NSProcessInfo.processInfo.processorCount;
 	uint32_t devID = 0xa070;
+#if TARGET_OS_TV == 0
 	if ([mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily5_v1]) {
 		devID = 0xa120;
 	} else if ([mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily4_v1]) {
@@ -2429,7 +2513,7 @@ void mvkPopulateGPUInfo(VkPhysicalDeviceProperties& devProps, id<MTLDevice> mtlD
 	} else if ([mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily2_v1]) {
 		devID = coreCnt > 2 ? 0xa081 : 0xa080;
 	}
-
+#endif
 	devProps.vendorID = 0x0000106b;	// Apple's PCI ID
 	devProps.deviceID = devID;
 	devProps.deviceType = VK_PHYSICAL_DEVICE_TYPE_INTEGRATED_GPU;
