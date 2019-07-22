@@ -148,7 +148,7 @@
 
 /** Allow the use of Metal events for Vulkan synchronizations such as VkSemaphores. Disabled by default. */
 #ifndef MVK_ALLOW_METAL_EVENTS
-#   define MVK_ALLOW_METAL_EVENTS    0
+#   define MVK_ALLOW_METAL_EVENTS    1
 #endif
 
 

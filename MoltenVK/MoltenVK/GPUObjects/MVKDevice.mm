@@ -920,7 +920,7 @@ void MVKPhysicalDevice::initFeatures() {
 #if TARGET_OS_TV == 0
 	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v4] ) {
 #else
-	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily2_v1] ) {
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v3] ) {
 #endif
 		_features.dualSrcBlend = true;
 	}
@@ -1631,6 +1631,14 @@ void MVKPhysicalDevice::logGPUInfo() {
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v3] ) { logMsg += "\n\t\tiOS GPU Family 1 v3"; }
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v2] ) { logMsg += "\n\t\tiOS GPU Family 1 v2"; }
     if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v1] ) { logMsg += "\n\t\tiOS GPU Family 1 v1"; }
+#else
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily2_v2] ) { logMsg += "\n\t\ttvOS GPU Family 2 v2"; }
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily2_v1] ) { logMsg += "\n\t\ttvOS GPU Family 2 v1"; }
+
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v4] ) { logMsg += "\n\t\ttvOS GPU Family 1 v4"; }
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v3] ) { logMsg += "\n\t\ttvOS GPU Family 1 v3"; }
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v2] ) { logMsg += "\n\t\ttvOS GPU Family 1 v2"; }
+	if ( [_mtlDevice supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v1] ) { logMsg += "\n\t\ttvOS GPU Family 1 v1"; }
 #endif
 #endif
 

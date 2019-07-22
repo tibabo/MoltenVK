@@ -144,7 +144,12 @@ void MVKRenderSubpass::populateMTLRenderPassDescriptor(MTLRenderPassDescriptor* 
 			mtlTexDesc.arrayLength = framebuffer->getLayerCount();
 		}
 #if MVK_IOS
-		if ([_renderPass->getDevice()->getMTLDevice() supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v3]) {
+#if TARGET_OS_TV == 0
+		if ([_renderPass->getDevice()->getMTLDevice() supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily1_v3])
+#else
+		if ([_renderPass->getDevice()->getMTLDevice() supportsFeatureSet: MTLFeatureSet_tvOS_GPUFamily1_v2])
+#endif
+		{
 			mtlTexDesc.storageMode = MTLStorageModeMemoryless;
 		} else {
 			mtlTexDesc.storageMode = MTLStorageModePrivate;

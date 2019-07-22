@@ -44,7 +44,7 @@ extern "C" {
 
 /** Building for iOS. Use ifdef instead of defined() operator to allow MVK_IOS to be used in expansions */
 #ifndef MVK_IOS
-#    ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+#    ifdef __TV_OS_VERSION_MAX_ALLOWED
 #        define MVK_IOS            1
 #    else
 #        define MVK_IOS            0

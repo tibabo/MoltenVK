@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		38A6592322E2006600C94D50 /* libglslang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A6592022E2006500C94D50 /* libglslang.a */; };
 		38A6592622E200AA00C94D50 /* libSPIRVCross.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A6592522E200AA00C94D50 /* libSPIRVCross.a */; };
-		38A65C2B22E2039C00C94D50 /* libSPIRVTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A65C2A22E2039C00C94D50 /* libSPIRVTools.a */; };
 		45003E73214AD4E500E989CB /* MVKExtensions.def in Headers */ = {isa = PBXBuildFile; fileRef = 45003E6F214AD4C900E989CB /* MVKExtensions.def */; };
 		45003E74214AD4E600E989CB /* MVKExtensions.def in Headers */ = {isa = PBXBuildFile; fileRef = 45003E6F214AD4C900E989CB /* MVKExtensions.def */; };
 		4553AEFB2251617100E8EBCD /* MVKBlockObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 4553AEF62251617100E8EBCD /* MVKBlockObserver.m */; };
@@ -427,7 +426,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38A65C2B22E2039C00C94D50 /* libSPIRVTools.a in Frameworks */,
 				38A6592322E2006600C94D50 /* libglslang.a in Frameworks */,
 				38A6592622E200AA00C94D50 /* libSPIRVCross.a in Frameworks */,
 			);
@@ -1105,6 +1103,11 @@
 			buildSettings = {
 				ARCHS = arm64;
 				BITCODE_GENERATION_MODE = bitcode;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"SPIRV_CROSS_NAMESPACE_OVERRIDE=MVK_spirv_cross",
+					"MVK_IOS=1",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = appletvos;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -1118,6 +1121,10 @@
 			buildSettings = {
 				ARCHS = arm64;
 				BITCODE_GENERATION_MODE = bitcode;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SPIRV_CROSS_NAMESPACE_OVERRIDE=MVK_spirv_cross",
+					"MVK_IOS=1",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = appletvos;
 				STRIP_INSTALLED_PRODUCT = NO;
