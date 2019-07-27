@@ -353,10 +353,10 @@ MTLVertexStepFunction mvkMTLVertexStepFunctionFromVkVertexInputRate(VkVertexInpu
 
 /** Returns the Metal MTLPrimitiveType corresponding to the specified Vulkan VkPrimitiveTopology. */
 MTLPrimitiveType mvkMTLPrimitiveTypeFromVkPrimitiveTopology(VkPrimitiveTopology vkTopology);
-
+#if TARGET_OS_TV == 0
 /** Returns the Metal MTLPrimitiveTopologyClass corresponding to the specified Vulkan VkPrimitiveTopology. */
 MTLPrimitiveTopologyClass mvkMTLPrimitiveTopologyClassFromVkPrimitiveTopology(VkPrimitiveTopology vkTopology);
-
+#endif
 /** Returns the Metal MTLTriangleFillMode corresponding to the specified Vulkan VkPolygonMode, */
 MTLTriangleFillMode mvkMTLTriangleFillModeFromVkPolygonMode(VkPolygonMode vkFillMode);
 

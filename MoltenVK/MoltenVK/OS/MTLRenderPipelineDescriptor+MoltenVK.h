@@ -31,6 +31,8 @@
  * property if it is available. otherwise, returns MTLPrimitiveTopologyClassUnspecified when
  * read and does nothing when set.
  */
-@property(nonatomic, readwrite) MTLPrimitiveTopologyClass inputPrimitiveTopologyMVK;
 
+#if TARGET_OS_TV == 0
+@property(nonatomic, readwrite) MTLPrimitiveTopologyClass inputPrimitiveTopologyMVK;
+#endif
 @end

@@ -1054,9 +1054,11 @@ void MVKGraphicsPipeline::addFragmentOutputToPipeline(MTLRenderPipelineDescripto
 
 	// Topology
 	if (pCreateInfo->pInputAssemblyState) {
+		#if TARGET_OS_TV == 0
 		plDesc.inputPrimitiveTopologyMVK = (isTessellationVertexPipeline || isRenderingPoints(pCreateInfo, reflectData))
 												? MTLPrimitiveTopologyClassPoint
 												: mvkMTLPrimitiveTopologyClassFromVkPrimitiveTopology(pCreateInfo->pInputAssemblyState->topology);
+		#endif
 	}
 
     // Color attachments

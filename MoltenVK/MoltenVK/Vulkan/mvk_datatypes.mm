@@ -833,7 +833,9 @@ MVK_PUBLIC_SYMBOL MTLTextureType mvkMTLTextureTypeFromVkImageViewType(VkImageVie
 			return MTLTextureType2DArray;
 		case VK_IMAGE_VIEW_TYPE_3D:				return MTLTextureType3D;
 		case VK_IMAGE_VIEW_TYPE_CUBE:			return MTLTextureTypeCube;
+#if TARGET_OS_TV == 0
 		case VK_IMAGE_VIEW_TYPE_CUBE_ARRAY:		return MTLTextureTypeCubeArray;
+#endif
 		default:                            	return MTLTextureType2D;
 	}
 }
@@ -1094,6 +1096,7 @@ MTLPrimitiveType mvkMTLPrimitiveTypeFromVkPrimitiveTopologyInObj(VkPrimitiveTopo
 }
 
 #undef mvkMTLPrimitiveTopologyClassFromVkPrimitiveTopology
+#if TARGET_OS_TV == 0
 MVK_PUBLIC_SYMBOL MTLPrimitiveTopologyClass mvkMTLPrimitiveTopologyClassFromVkPrimitiveTopology(VkPrimitiveTopology vkTopology) {
 	return mvkMTLPrimitiveTopologyClassFromVkPrimitiveTopologyInObj(vkTopology, nullptr);
 }
@@ -1122,7 +1125,7 @@ MTLPrimitiveTopologyClass mvkMTLPrimitiveTopologyClassFromVkPrimitiveTopologyInO
 			return MTLPrimitiveTopologyClassUnspecified;
 	}
 }
-
+#endif
 #undef mvkMTLTriangleFillModeFromVkPolygonMode
 MVK_PUBLIC_SYMBOL MTLTriangleFillMode mvkMTLTriangleFillModeFromVkPolygonMode(VkPolygonMode vkFillMode) {
 	return mvkMTLTriangleFillModeFromVkPolygonModeInObj(vkFillMode, nullptr);

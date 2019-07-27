@@ -94,8 +94,9 @@ id<MTLRenderPipelineState> MVKCommandResourceFactory::newCmdClearMTLRenderPipeli
 	plDesc.vertexFunction = getClearVertFunction(attKey);
     plDesc.fragmentFunction = getClearFragFunction(attKey);
 	plDesc.sampleCount = attKey.mtlSampleCount;
+#if TARGET_OS_TV == 0
 	plDesc.inputPrimitiveTopologyMVK = MTLPrimitiveTopologyClassTriangle;
-
+#endif
     for (uint32_t caIdx = 0; caIdx < kMVKClearAttachmentDepthStencilIndex; caIdx++) {
         MTLRenderPipelineColorAttachmentDescriptor* colorDesc = plDesc.colorAttachments[caIdx];
         colorDesc.pixelFormat = (MTLPixelFormat)attKey.attachmentMTLPixelFormats[caIdx];

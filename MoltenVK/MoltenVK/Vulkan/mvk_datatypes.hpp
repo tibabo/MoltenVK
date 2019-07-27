@@ -53,10 +53,10 @@ MTLVertexFormat mvkMTLVertexFormatFromVkFormatInObj(VkFormat vkFormat, MVKBaseOb
 
 MTLPrimitiveType mvkMTLPrimitiveTypeFromVkPrimitiveTopologyInObj(VkPrimitiveTopology vkTopology, MVKBaseObject* mvkObj);
 #define mvkMTLPrimitiveTypeFromVkPrimitiveTopology(vkTopology) mvkMTLPrimitiveTypeFromVkPrimitiveTopologyInObj(vkTopology, this)
-
+#if TARGET_OS_TV == 0
 MTLPrimitiveTopologyClass mvkMTLPrimitiveTopologyClassFromVkPrimitiveTopologyInObj(VkPrimitiveTopology vkTopology, MVKBaseObject* mvkObj);
 #define mvkMTLPrimitiveTopologyClassFromVkPrimitiveTopology(vkTopology) mvkMTLPrimitiveTopologyClassFromVkPrimitiveTopologyInObj(vkTopology, this)
-
+#endif
 MTLTriangleFillMode mvkMTLTriangleFillModeFromVkPolygonModeInObj(VkPolygonMode vkFillMode, MVKBaseObject* mvkObj);
 #define mvkMTLTriangleFillModeFromVkPolygonMode(vkFillMode) mvkMTLTriangleFillModeFromVkPolygonModeInObj(vkFillMode, this)
 

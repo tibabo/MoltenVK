@@ -21,18 +21,14 @@
 #include "MVKCommonEnvironment.h"
 
 @implementation MTLRenderPipelineDescriptor (MoltenVK)
-
--(MTLPrimitiveTopologyClass) inputPrimitiveTopologyMVK {
 #if TARGET_OS_TV == 0
+-(MTLPrimitiveTopologyClass) inputPrimitiveTopologyMVK {
 	if ( [self respondsToSelector: @selector(inputPrimitiveTopology)] ) { return self.inputPrimitiveTopology; }
-#endif
 	return MTLPrimitiveTopologyClassUnspecified;
 }
 
 -(void) setInputPrimitiveTopologyMVK: (MTLPrimitiveTopologyClass) topology {
-#if TARGET_OS_TV == 0
 	if ([self respondsToSelector: @selector(setInputPrimitiveTopology:)]) { self.inputPrimitiveTopology = topology; }
-#endif
 }
-
+#endif
 @end

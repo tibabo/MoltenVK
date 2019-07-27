@@ -852,9 +852,6 @@ void MVKPhysicalDevice::initMetalFeatures() {
 			setMSLVersion(1, 1);
 			break;
 #if MVK_IOS
-		case MTLLanguageVersion2_2:
-			setMSLVersion(2, 2);
-			break;
 		case MTLLanguageVersion1_0:
 			setMSLVersion(1, 0);
 			break;
